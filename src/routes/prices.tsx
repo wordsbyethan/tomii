@@ -192,6 +192,7 @@ const CATEGORIES: PriceCategory[] = [
       { name: "Deep Cleansing (Gentlemen)", price: naira(25000) },
       { name: "Micro-needling Facial", price: naira(60000) },
       { name: "Under Arm Wax", price: naira(7000) },
+      { name: "Chin Wax", price: naira(7000) },
       { name: "Brazilian Wax", price: naira(15000) },
       { name: "Hollywood Wax", price: naira(20000) },
       { name: "Full Body Wax", price: naira(40000) },
