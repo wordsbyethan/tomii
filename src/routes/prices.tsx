@@ -172,7 +172,7 @@ const CATEGORIES: PriceCategory[] = [
       { name: "Hybrid Lashes", price: naira(17000) },
       { name: "Volume Lashes", price: naira(20000) },
       { name: "Mega Volume", price: naira(24000) },
-      { name: "Ombré Brows", price: naira(35000) },
+      { name: "Ombré Brows", price: naira(30000) },
       { name: "Powder Brows", price: naira(35000) },
       { name: "Microblading", price: naira(40000) },
       { name: "Combination Brows", price: naira(40000) },
