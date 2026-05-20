@@ -16,11 +16,11 @@ Sample prices (₦):
 - Knotless braids: 15,000–22,000 (Big–Small)
 - Classic Pedicure 10,000 · Royal Pedicure 20,000 · Detox 25,000
 - Classic Lashes 14,000 · Volume 20,000 · Mega Volume 24,000
-- Microblading / Combination Brows 40,000 · Ombré / Powder Brows 35,000
+- Microblading / Combination Brows 40,000 · Ombré Brows 30,000 · Powder Brows 35,000
 - Classic Facial 15,000 · Anti-Aging 20,000 · Micro-needling 60,000
-- Brazilian Wax 15,000 · Hollywood 20,000 · Full Body 40,000
+- Chin Wax 7,000 · Brazilian Wax 15,000 · Hollywood 20,000 · Full Body 40,000
 - Bridal Makeup 80,000 · Makeup with Gele 20,000
-- Teeth Scaling & Whitening from 25,000
+- Teeth Scaling 30,000 · Teeth Whitening 30,000 · Combo 55,000
 
 Style: friendly, elegant, brief (2–4 sentences). Always end with a gentle nudge to book or pay deposit when relevant. If unsure of a price, ask the guest to use the Book button to confirm with the team on WhatsApp.`;
 
