@@ -225,8 +225,8 @@ const CATEGORIES: PriceCategory[] = [
     icon: Smile,
     image: teethImg,
     items: [
-      { name: "Teeth Scaling", price: naira(25000) },
-      { name: "Teeth Whitening", price: naira(40000) },
+      { name: "Teeth Scaling", price: naira(30000) },
+      { name: "Teeth Whitening", price: naira(30000) },
       { name: "Scaling + Whitening Combo", price: naira(55000) },
     ],
   },
