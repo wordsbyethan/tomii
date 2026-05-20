@@ -437,10 +437,10 @@ function PricesPage() {
                         {cat.items.map((item) => (
                           <li
                             key={item.name}
-                            className="group flex items-center justify-between gap-3 rounded-xl border border-border/40 bg-background px-4 py-3 transition-colors hover:border-gold/60"
+                            className="group flex flex-col gap-3 rounded-xl border border-border/40 bg-background px-4 py-3 transition-colors hover:border-gold/60 sm:flex-row sm:items-center sm:justify-between"
                           >
                             <div className="min-w-0 flex-1">
-                              <div className="truncate text-sm font-medium text-foreground">
+                              <div className="text-sm font-medium text-foreground break-words">
                                 {item.name}
                               </div>
                               {item.note && (
@@ -449,36 +449,40 @@ function PricesPage() {
                                 </div>
                               )}
                             </div>
-                            <span className="shrink-0 font-display text-base text-gradient-gold">
-                              {item.price}
-                            </span>
-                            <BookingDialog
-                              category={cat.title}
-                              serviceOptions={serviceNames}
-                              defaultService={item.name}
-                              trigger={
-                                <button
-                                  type="button"
-                                  aria-label={`Book ${item.name}`}
-                                  className="ml-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-foreground/60 transition-colors hover:border-gold hover:bg-gold hover:text-ink"
-                                >
-                                  <CalendarHeart className="h-3.5 w-3.5" />
-                                </button>
-                              }
-                            />
-                            <PayDepositDialog
-                              category={cat.title}
-                              service={item.name}
-                              trigger={
-                                <button
-                                  type="button"
-                                  aria-label={`Pay deposit for ${item.name}`}
-                                  className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold/60 text-gold transition-colors hover:bg-gold hover:text-ink"
-                                >
-                                  <Wallet className="h-3.5 w-3.5" />
-                                </button>
-                              }
-                            />
+                            <div className="flex items-center justify-between gap-2 sm:justify-end">
+                              <span className="shrink-0 font-display text-base text-gradient-gold whitespace-nowrap">
+                                {item.price}
+                              </span>
+                              <div className="flex items-center gap-1.5">
+                                <BookingDialog
+                                  category={cat.title}
+                                  serviceOptions={serviceNames}
+                                  defaultService={item.name}
+                                  trigger={
+                                    <button
+                                      type="button"
+                                      aria-label={`Book ${item.name}`}
+                                      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-foreground/60 transition-colors hover:border-gold hover:bg-gold hover:text-ink"
+                                    >
+                                      <CalendarHeart className="h-3.5 w-3.5" />
+                                    </button>
+                                  }
+                                />
+                                <PayDepositDialog
+                                  category={cat.title}
+                                  service={item.name}
+                                  trigger={
+                                    <button
+                                      type="button"
+                                      aria-label={`Pay deposit for ${item.name}`}
+                                      className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold/60 text-gold transition-colors hover:bg-gold hover:text-ink"
+                                    >
+                                      <Wallet className="h-3.5 w-3.5" />
+                                    </button>
+                                  }
+                                />
+                              </div>
+                            </div>
                           </li>
                         ))}
                       </ul>
