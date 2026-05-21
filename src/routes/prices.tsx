@@ -114,7 +114,7 @@ const CATEGORIES: PriceCategory[] = [
     icon: User,
     image: barberImg,
     items: [
-      { name: "Men's Haircut", price: naira(2000) },
+      { name: "Men's Haircut", price: naira(4000) },
       { name: "Children's Haircut", price: naira(2000) },
       { name: "Babies Barbing (New)", price: naira(5000) },
       { name: "Women's Haircut", price: naira(6000) },

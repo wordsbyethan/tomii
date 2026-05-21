@@ -7,12 +7,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Banknote, Copy, Check, Landmark, Wallet, MessageCircle, ShieldCheck, Upload, Loader2, CheckCircle2 } from "lucide-react";
+import { Banknote, Copy, Check, MessageCircle, ShieldCheck, Upload, Loader2, CheckCircle2 } from "lucide-react";
 import { BUSINESS, waLink, makeAppointmentRef } from "@/lib/business";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-type Method = "transfer" | "online" | "instudio";
+type Method = "transfer";
 
 type PayDepositDialogProps = {
   service?: string;
@@ -109,7 +109,8 @@ export function PayDepositDialog({
   trigger,
 }: PayDepositDialogProps) {
   const [open, setOpen] = useState(false);
-  const [method, setMethod] = useState<Method>(defaultMethod);
+  const method: Method = "transfer";
+  void defaultMethod;
   const [amount, setAmount] = useState<number>(defaultAmount);
   const reference = useMemo(() => makeAppointmentRef(), [open]);
   const [name, setName] = useState("");
@@ -219,17 +220,6 @@ export function PayDepositDialog({
     `Please confirm once received. Thank you!`,
   ].join("\n");
 
-  const onlineMessage = [
-    summary,
-    ``,
-    `Please send me a secure online payment link (Paystack / Flutterwave).`,
-  ].join("\n");
-
-  const instudioMessage = [
-    summary,
-    ``,
-    `I'd like to pay in-studio on arrival. Please confirm my appointment slot.`,
-  ].join("\n");
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -284,69 +274,31 @@ export function PayDepositDialog({
             <p className="text-[11px] text-muted-foreground">Suggested: 50% of your service price.</p>
           </div>
 
-          <div className="grid grid-cols-3 gap-2">
-            {([
-              { id: "transfer", label: "Transfer", icon: Landmark },
-              { id: "online", label: "Online", icon: Wallet },
-              { id: "instudio", label: "In-Studio", icon: Banknote },
-            ] as const).map(({ id, label, icon: Icon }) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setMethod(id)}
-                className={`flex flex-col items-center gap-1 rounded-xl border px-2 py-3 text-xs font-medium transition-all ${
-                  method === id
-                    ? "border-gold bg-gold-soft/40 text-foreground shadow-gold"
-                    : "border-border bg-background text-muted-foreground hover:border-gold/60"
-                }`}
-              >
-                <Icon className="h-4 w-4 text-gold" />
-                {label}
-              </button>
-            ))}
+          <div className="space-y-3 rounded-2xl border border-border bg-background p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Bank</div>
+                <div className="text-sm font-medium text-foreground">{BUSINESS.bank.bankName}</div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Account number</div>
+                <div className="font-display text-lg text-foreground">{BUSINESS.bank.accountNumber}</div>
+              </div>
+              <CopyChip value={BUSINESS.bank.accountNumber} />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Account name</div>
+                <div className="text-sm font-medium text-foreground">{BUSINESS.bank.accountName}</div>
+              </div>
+              <CopyChip value={BUSINESS.bank.accountName} />
+            </div>
+            <p className="rounded-xl bg-blush/40 px-3 py-2 text-[11px] text-foreground/80">
+              Use <strong>{reference}</strong> as your transfer narration so we can match your payment instantly.
+            </p>
           </div>
-
-          {method === "transfer" && (
-            <div className="space-y-3 rounded-2xl border border-border bg-background p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Bank</div>
-                  <div className="text-sm font-medium text-foreground">{BUSINESS.bank.bankName}</div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Account number</div>
-                  <div className="font-display text-lg text-foreground">{BUSINESS.bank.accountNumber}</div>
-                </div>
-                <CopyChip value={BUSINESS.bank.accountNumber} />
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Account name</div>
-                  <div className="text-sm font-medium text-foreground">{BUSINESS.bank.accountName}</div>
-                </div>
-                <CopyChip value={BUSINESS.bank.accountName} />
-              </div>
-              <p className="rounded-xl bg-blush/40 px-3 py-2 text-[11px] text-foreground/80">
-                Use <strong>{reference}</strong> as your transfer narration so we can match your payment instantly.
-              </p>
-            </div>
-          )}
-
-          {method === "online" && (
-            <div className="rounded-2xl border border-border bg-background p-4 text-sm text-muted-foreground">
-              We'll send you a secure Paystack / Flutterwave link on WhatsApp. Pay with card,
-              bank or USSD — confirmation is instant.
-            </div>
-          )}
-
-          {method === "instudio" && (
-            <div className="rounded-2xl border border-border bg-background p-4 text-sm text-muted-foreground">
-              Reserve your slot now and pay on arrival at our Arepo studio. Cash or POS accepted.
-              Please arrive 10 minutes before your appointment.
-            </div>
-          )}
 
           {method === "transfer" && (
             <div className="space-y-3 rounded-2xl border border-gold/40 bg-gold-soft/20 p-4">
@@ -412,23 +364,13 @@ export function PayDepositDialog({
           )}
 
           <a
-            href={waLink(
-              method === "transfer"
-                ? transferMessage
-                : method === "online"
-                  ? onlineMessage
-                  : instudioMessage,
-            )}
+            href={waLink(transferMessage)}
             target="_blank"
             rel="noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-gold px-6 py-3.5 text-sm font-medium text-ink shadow-gold transition-transform hover:-translate-y-0.5"
           >
             <MessageCircle className="h-4 w-4" />
-            {method === "transfer"
-              ? "I've Sent the Transfer — Notify on WhatsApp"
-              : method === "online"
-                ? "Request Payment Link on WhatsApp"
-                : "Confirm In-Studio Payment on WhatsApp"}
+            I've Sent the Transfer — Notify on WhatsApp
           </a>
 
           <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-muted-foreground">
