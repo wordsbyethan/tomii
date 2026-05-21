@@ -364,23 +364,13 @@ export function PayDepositDialog({
           )}
 
           <a
-            href={waLink(
-              method === "transfer"
-                ? transferMessage
-                : method === "online"
-                  ? onlineMessage
-                  : instudioMessage,
-            )}
+            href={waLink(transferMessage)}
             target="_blank"
             rel="noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-gold px-6 py-3.5 text-sm font-medium text-ink shadow-gold transition-transform hover:-translate-y-0.5"
           >
             <MessageCircle className="h-4 w-4" />
-            {method === "transfer"
-              ? "I've Sent the Transfer — Notify on WhatsApp"
-              : method === "online"
-                ? "Request Payment Link on WhatsApp"
-                : "Confirm In-Studio Payment on WhatsApp"}
+            I've Sent the Transfer — Notify on WhatsApp
           </a>
 
           <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-muted-foreground">
