@@ -8,8 +8,6 @@ import { CATEGORIES, type Service } from "@/data/services";
 import { BUSINESS, waLink } from "@/lib/business";
 import {
   Landmark,
-  Banknote,
-  Wallet,
   ShieldCheck,
   ArrowRight,
 } from "lucide-react";
