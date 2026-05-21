@@ -179,7 +179,7 @@ function ServicesPage() {
               </p>
             </div>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="mt-12 grid gap-6 md:grid-cols-1 md:max-w-xl md:mx-auto">
               <div className="rounded-3xl border border-border/60 bg-card p-7 shadow-soft flex flex-col">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gold-soft/40">
                   <Landmark className="h-5 w-5 text-gold" strokeWidth={1.4} />
@@ -202,37 +202,11 @@ function ServicesPage() {
                     <dd className="font-medium text-foreground">{BUSINESS.bank.accountName}</dd>
                   </div>
                 </dl>
-                <div className="mt-5">
-                  <PayDepositDialog defaultMethod="transfer" />
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-border/60 bg-card p-7 shadow-soft flex flex-col">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gold-soft/40">
-                  <Wallet className="h-5 w-5 text-gold" strokeWidth={1.4} />
-                </span>
-                <h3 className="mt-5 font-display text-xl text-foreground">Online Payment</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Pay securely with card, Paystack or Flutterwave via the link our team will share after booking.
-                </p>
-                <div className="mt-auto pt-5">
-                  <PayDepositDialog defaultMethod="online" />
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-border/60 bg-card p-7 shadow-soft flex flex-col">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gold-soft/40">
-                  <Banknote className="h-5 w-5 text-gold" strokeWidth={1.4} />
-                </span>
-                <h3 className="mt-5 font-display text-xl text-foreground">Pay In-Studio</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Cash or card accepted on arrival at our Arepo location. A 50% deposit is required to hold your slot.
-                </p>
                 <p className="mt-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-foreground/70">
                   <ShieldCheck className="h-4 w-4 text-gold" /> 100% Secure
                 </p>
-                <div className="mt-auto pt-5">
-                  <PayDepositDialog defaultMethod="instudio" />
+                <div className="mt-5">
+                  <PayDepositDialog defaultMethod="transfer" />
                 </div>
               </div>
             </div>
