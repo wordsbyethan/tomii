@@ -104,7 +104,7 @@ function validateProofFile(file: File): string | null {
 export function PayDepositDialog({
   service,
   category,
-  defaultAmount = 20000,
+  defaultAmount,
   defaultMethod = "transfer",
   trigger,
 }: PayDepositDialogProps) {
