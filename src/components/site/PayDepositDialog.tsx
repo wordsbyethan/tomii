@@ -104,14 +104,17 @@ function validateProofFile(file: File): string | null {
 export function PayDepositDialog({
   service,
   category,
-  defaultAmount = 20000,
+  defaultAmount,
   defaultMethod = "transfer",
   trigger,
 }: PayDepositDialogProps) {
   const [open, setOpen] = useState(false);
   const method: Method = "transfer";
   void defaultMethod;
-  const [amount, setAmount] = useState<number>(defaultAmount);
+  const [amountInput, setAmountInput] = useState<string>(
+    defaultAmount ? String(defaultAmount) : "",
+  );
+  const amount = Number(amountInput) || 0;
   const reference = useMemo(() => makeAppointmentRef(), [open]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -265,13 +268,14 @@ export function PayDepositDialog({
             </label>
             <input
               type="number"
-              min={1000}
-              step={1000}
-              value={amount}
-              onChange={(e) => setAmount(Number(e.target.value) || 0)}
+              inputMode="numeric"
+              min={0}
+              placeholder="Enter any amount"
+              value={amountInput}
+              onChange={(e) => setAmountInput(e.target.value.replace(/[^0-9]/g, ""))}
               className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:border-gold focus:outline-none"
             />
-            <p className="text-[11px] text-muted-foreground">Suggested: 50% of your service price.</p>
+            <p className="text-[11px] text-muted-foreground">Pay any amount you wish — no minimum.</p>
           </div>
 
           <div className="space-y-3 rounded-2xl border border-border bg-background p-4">
