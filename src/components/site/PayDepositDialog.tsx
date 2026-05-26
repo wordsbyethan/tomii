@@ -111,7 +111,10 @@ export function PayDepositDialog({
   const [open, setOpen] = useState(false);
   const method: Method = "transfer";
   void defaultMethod;
-  const [amount, setAmount] = useState<number>(defaultAmount);
+  const [amountInput, setAmountInput] = useState<string>(
+    defaultAmount ? String(defaultAmount) : "",
+  );
+  const amount = Number(amountInput) || 0;
   const reference = useMemo(() => makeAppointmentRef(), [open]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
