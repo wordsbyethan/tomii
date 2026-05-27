@@ -151,14 +151,24 @@ function AdminDeposits() {
                     <td className="px-4 py-3 capitalize">{d.payment_method}</td>
                     <td className="px-4 py-3">
                       {d.proof_url ? (
-                        <a
-                          href={d.proof_url}
-                          target="_blank"
-                          rel="noreferrer"
+                        <button
+                          onClick={async () => {
+                            const key = d.proof_url!.includes("/deposit-proofs/")
+                              ? d.proof_url!.split("/deposit-proofs/")[1]
+                              : d.proof_url!;
+                            const { data, error } = await supabase.storage
+                              .from("deposit-proofs")
+                              .createSignedUrl(key, 300);
+                            if (error || !data?.signedUrl) {
+                              toast.error(error?.message ?? "Could not open proof");
+                              return;
+                            }
+                            window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+                          }}
                           className="inline-flex items-center gap-1 text-gold hover:underline"
                         >
                           View <ExternalLink className="h-3 w-3" />
-                        </a>
+                        </button>
                       ) : (
                         <span className="text-xs text-muted-foreground">none</span>
                       )}
