@@ -165,7 +165,6 @@ export function PayDepositDialog({
         toast.error(msg);
         return;
       }
-      const { data: pub } = supabase.storage.from("deposit-proofs").getPublicUrl(path);
       const { error: insErr } = await supabase.from("deposits").insert({
         reference,
         service: service ?? null,
@@ -174,7 +173,7 @@ export function PayDepositDialog({
         customer_name: name || null,
         customer_phone: phone || null,
         payment_method: method,
-        proof_url: pub.publicUrl,
+        proof_url: path,
         status: "pending",
       });
       if (insErr) {
