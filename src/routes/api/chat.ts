@@ -2,6 +2,7 @@ import "@tanstack/react-start";
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
 const SYSTEM_PROMPT = `You are Tomi, the warm, concise concierge for Tomi Beauty Hub & Spa in Arepo, Ogun State, Nigeria.
 You help guests with services, prices (in Naira ₦), bookings, deposits, location, and general beauty advice.
@@ -32,11 +33,19 @@ export const Route = createFileRoute("/api/chat")({
         if (!Array.isArray(body.messages)) {
           return new Response("Messages are required", { status: 400 });
         }
-        const key = process.env.LOVABLE_API_KEY;
-        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+        const lovableKey = process.env.LOVABLE_API_KEY;
+        const geminiKey = process.env.GEMINI_API_KEY;
 
-        const gateway = createLovableAiGatewayProvider(key);
-        const model = gateway("google/gemini-3-flash-preview");
+        let model;
+        if (lovableKey) {
+          const gateway = createLovableAiGatewayProvider(lovableKey);
+          model = gateway("google/gemini-3-flash-preview");
+        } else if (geminiKey) {
+          const google = createGoogleGenerativeAI({ apiKey: geminiKey });
+          model = google("gemini-2.5-flash");
+        } else {
+          return new Response("No AI provider configured", { status: 500 });
+        }
 
         try {
           const result = streamText({
