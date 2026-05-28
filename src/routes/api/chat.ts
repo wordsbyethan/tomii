@@ -2,6 +2,7 @@ import "@tanstack/react-start";
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
 const SYSTEM_PROMPT = `You are Tomi, the warm, concise concierge for Tomi Beauty Hub & Spa in Arepo, Ogun State, Nigeria.
 You help guests with services, prices (in Naira ₦), bookings, deposits, location, and general beauty advice.
