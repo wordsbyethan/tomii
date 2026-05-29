@@ -34,7 +34,11 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("Messages are required", { status: 400 });
         }
         const lovableKey = process.env.LOVABLE_API_KEY;
-        const geminiKey = process.env.GEMINI_API_KEY;
+        const geminiKey =
+          process.env.GEMINI_API_KEY ||
+          process.env.VITE_GEMINI_API_KEY ||
+          process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
+          process.env.GOOGLE_API_KEY;
 
         let model;
         if (lovableKey) {
